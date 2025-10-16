@@ -48,6 +48,8 @@ nbptintI1 = size(indptI1,1); nbptintI2 = size(indptI2,1);
 %%%%%%%%%%%%%%%%%
 %% A COMPLETER %%
 %%%%%%%%%%%%%%%%%
+vois1 = voisinage(I1,Ptint1,K);
+vois2 = voisinage(I2,Ptint2,K);
 
 % Nb Pixels par fenetre de correlation
 NbPix = K*K;
@@ -61,18 +63,29 @@ i1 = i1(:); i2 = i2(:);
 %%%%%%%%%%%%%%%%%
 %% A COMPLETER %%
 %%%%%%%%%%%%%%%%%
+moy1 = mean(vois1,2);
+moy2 = mean(vois2,2);
+
 
 % Variance des niveaux de gris du voisinage de chaque point
 % Utilisation de var
 %%%%%%%%%%%%%%%%%
 %% A COMPLETER %%
 %%%%%%%%%%%%%%%%%
+variance1 = var(vois1,0,2);
+variance2 = var(vois2,0,2);
 
 % Pour chaque combinaison de paires de points, la covariance 
 % entre les deux voisinages : le numerateur dans la formule ZNCC
+% cov(P1,P2) = Sum_{i=-k}^k Sum_{j=-k}^k  (I1(p1x+i,p1y+j)-E[P1])
+%                                           *(I2(p2x+i,p2y+j)-E[P2])/(2*k+1)^2
 %%%%%%%%%%%%%%%%%
 %% A COMPLETER %%
 %%%%%%%%%%%%%%%%%
+covariance = sum((vois1(indptI1(i1), :) - moy1(indptI1(i1))).*(vois2(indptI2(i2), :) - moy2(indptI2(i2))), 2) ./ ((2*K+1)^2);
+
+
+
 
 % Calcul du score de correlation : 
 % ajouter le denominateur dans la formule ZNCC 
@@ -80,6 +93,8 @@ i1 = i1(:); i2 = i2(:);
 %%%%%%%%%%%%%%%%%
 %% A COMPLETER %%
 %%%%%%%%%%%%%%%%%
+cor = covariance./(sqrt( variance1(indptI1(i1)) .* variance2(indptI2(i2)  )));
+
 
 % Affectation a la matrice C
 C(indptI1(i1)+(indptI2(i2)-1)*nptI1) = cor';

@@ -18,9 +18,17 @@ npt = size(xyPt,1);
 voisins = zeros(npt,TailleFenetre*TailleFenetre);
 
 % Calcul de la demi-fenetre de correlation
-K = floor(TailleFenetre/2);
+k = floor(TailleFenetre/2);
 
 %%%%%%%%%%%%%%%%%
 %% A COMPLETER %%
 %%%%%%%%%%%%%%%%%
+for i=1:npt
+    y = xyPt(i,1);
+    x = xyPt(i,2);
+    tmp = I((x-k):(x+k),(y-k):(y+k));
+    voisins(i,:) = tmp(:);
 
+end
+
+end
