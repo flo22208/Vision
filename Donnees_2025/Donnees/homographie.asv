@@ -51,14 +51,9 @@ A = reshape([A1';A2'],9,[]);
 % Utiliser la fonction matlab svd : 
 % H est le vecteur propre associee a la plus petite valeur propre de A^TA
 % ... A completer ...
-%[U,W,V] = svd(A);
-[U,W] = eig(A*A');
 
-[~,indmin] = min(diag(W));
-
-H = U(:,indmin);
+[U,W,V] = svd(A'*A);
 
 
 % Former la matrice H de taille 3x3
 % ... A completer ...
-H = reshape(H,3,3)';
