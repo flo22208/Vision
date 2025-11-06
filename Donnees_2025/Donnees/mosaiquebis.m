@@ -7,7 +7,7 @@
 % C'est la raison pour laquelle on inverse les lignes et les colonnes 
 % dans la reconstruction de la mosaique. 
 
-function [Imos] = mosaique(I1,I2,H)
+function [Imos] = mosaiquebis(I1,I2,H)
 
 % On recupere la taille des deux images. 
 [nblI1 nbcI1] = size(I1);
@@ -87,9 +87,18 @@ for x=1:nbcImos,
     % On verifie que xy_R2 appartient bien a l'image I2 
     % avant d'affecter cette valeur a Imos
     % Lignes et colonnes sont inversees. 
-    if(x_R2>=1 & x_R2<=nbcI2 & y_R2>=1 & y_R2<=nblI2)
-          Imos(y,x)=I2(y_R2,x_R2);
-        end 
+    
+   
 
+    if(x_R2>=1 & x_R2<=nbcI2 & y_R2>=1 & y_R2<=nblI2 & x_R1>=1 & x_R1<=nbcI1 & y_R1>=1 & y_R1<=nblI1 )
+            d1 = nbcI1-x_R1;
+            d2 = x_R2;
+        
+            p1 = d1/(d1+d2);
+            p2 = d2/(d1+d2);
+          Imos(y,x)= round(p2 * I2(y_R2,x_R2) + p1 * I1(y_R1,x_R1) );
+    elseif (x_R2>=1 & x_R2<=nbcI2 & y_R2>=1 & y_R2<=nblI2)
+        Imos(y,x) = I2(y_R2,x_R2);
+    end
   end
 end

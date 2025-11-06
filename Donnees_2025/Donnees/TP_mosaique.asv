@@ -58,7 +58,7 @@ H = homographie(XY_C1,XY_C2);
 % % Version 2 pour la reconstruction                %
 % % A DECOMMENTER QUAND MOSAIQUEBIS AURA ETE ECRITE %
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Imosbis = mosaiquebis(Im1,Im2,H);
+% Imosbis = mosaiquebis(Im1,Im2,H);
 % figure; 
 % affichage_image(uint8(Imosbis),'Mosaique obtenue a partir des 2 images initiales (version 2)',1,1,1);
 % % SAUVEGARDE DE LA MOSAIQUE A DEUX IMAGES VERSION 2
@@ -94,12 +94,10 @@ Imoscoul = mosaiquecoul(Im1_coul,Im2_coul,H);
 %Imoscoul = mosaiqueN(list_I,list_H);
 
 %%%%% refaire une mosaique de l'image créer et l'image 3
-[XY_mos,Res_mos] = harris(Imosbis,TailleFenetre,NbPoints,k);
-[XY_3,Res_3] = harris(Im3,TailleFenetre,NbPoints,k);
-[XY_Cmos_2,XY_C3_2] = apparier_POI(Imosbis,XY_mos,Im3,XY_3,TailleFenetre,seuil);
-H2 = homographie(XY_Cmos_2,XY_C3_2);
 
-Imoscoul = mosaiquecoul(Imoscoul,Im3_coul,H2);
+
+
+
 
 figure;
 affichage_image(uint8(Imoscoul),'Mosaique obtenue a partir des N images couleur initiales (version 2)',1,1,1);
