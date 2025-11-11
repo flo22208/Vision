@@ -31,17 +31,17 @@ ind2_1 = ind2_1(:);
 max_seuil = seuil*max(maxI1);
 
 ind_contraintes = [];
-tol_symetrie = 30;  %%% mettre à 0 si forte 
+tol_symetrie = 3;
 
 for i=1:length(ind1_2)
-    j = ind1_2(i);
-    i_inv = ind2_1(j); 
+    j = ind1_2(i); % meilleur match du point i dans l'image 2
+    i_inv = ind2_1(j); % match inverse : meilleur match de j dans l'image 1
 
 
-    dist_sym = norm(XY_1(i,:) - XY_1(i_inv,:));
+      dist_sym = norm(XY_1(i,:) - XY_1(i_inv,:));
 
 
-    if dist_sym<tol_symetrie   %%%%ind2_1(ind1_2(i))== i
+    if ind2_1(ind1_2(i))== i
         if maxI1(i)>max_seuil
             ind_contraintes = [ind_contraintes;i];
         end
@@ -64,9 +64,6 @@ mesurey2 = XY_2(ind2,2);
 figure;
 affichage_appariement(Im1,mesurex1,mesurey1,'Points d''interet Image 1',1,2,1);
 affichage_appariement(Im2,mesurex2,mesurey2,'Points d''interet correspondants Image 2',1,2,2);
-
-"nombre de points garde"
-size(mesurey2,1)
 
 XY_C1 = [mesurex1(:) mesurey1(:)];
 XY_C2 = [mesurex2(:) mesurey2(:)];

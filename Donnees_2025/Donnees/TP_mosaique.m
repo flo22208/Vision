@@ -18,7 +18,7 @@ affichage_image(Im2,'Image 2',1,2,2);
 TailleFenetre = 15;
 NbPoints = 120 ; %%%% changer de 80 à 120
 k = 0.05;
-seuil = 0.91;
+seuil = 0.91;%%%0.91;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
