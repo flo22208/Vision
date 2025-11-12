@@ -96,7 +96,14 @@ for x=1:nbcImos,
         
             p1 = d1/(d1+d2);
             p2 = d2/(d1+d2);
-          Imos(y,x,:)= round(p2 * I2(y_R2,x_R2,:) + p1 * I1(y_R1,x_R1,:) );
+            if (sum(I2(y_R2,x_R2,:),3)==0)
+                Imos(y,x,:)= I1(y_R1,x_R1,:);
+            elseif (sum(I1(y_R1,x_R1,:),3)==0)
+                Imos(y,x,:)= I2(y_R2,x_R2,:);
+            else
+                Imos(y,x,:)= round(p2 * I2(y_R2,x_R2,:) + p1 * I1(y_R1,x_R1,:) );
+            end
+
     elseif (x_R2>=1 & x_R2<=nbcI2 & y_R2>=1 & y_R2<=nblI2)
         Imos(y,x,:) = I2(y_R2,x_R2,:);
     end

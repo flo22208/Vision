@@ -31,7 +31,7 @@ ind2_1 = ind2_1(:);
 max_seuil = seuil*max(maxI1);
 
 ind_contraintes = [];
-tol_symetrie = 30;  %%% mettre à 0 si forte 
+tol_symetrie = 1;  %%% mettre à 0 si forte 
 
 for i=1:length(ind1_2)
     j = ind1_2(i);
